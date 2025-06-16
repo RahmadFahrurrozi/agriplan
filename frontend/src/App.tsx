@@ -1,10 +1,15 @@
-import HomePage from "./pages/home";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/home";
+import About from "./pages/about";
 
 const App = () => {
   return (
-    <main>
-      <HomePage />
-    </main>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
