@@ -1,6 +1,6 @@
-import loginImage from "../assets/login-image.jpg";
+import loginIlustration from "../assets/login-ilustration.svg";
 
 const DATA_IMAGE = {
-  loginImage,
+  loginIlustration,
 };
 export default DATA_IMAGE;
