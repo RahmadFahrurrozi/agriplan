@@ -12,4 +12,4 @@ AgriPlan is a web-based platform that helps small farmers manage planting schedu
 - 🌦️ **Weather API (OpenWeatherMap)**: Daily weather forecast based on farmer's location
 - 🤖 **(Optional AI)**: Crop recommendations based on weather & location
 
-`on-progress`
+`on-progress` + `solo-dev`
