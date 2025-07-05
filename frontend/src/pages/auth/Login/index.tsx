@@ -1,10 +1,11 @@
+import AuthLayout from "../layout/authLayout";
 import LoginForm from "./components/login-form";
 
 const LoginPage = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <AuthLayout>
       <LoginForm />
-    </div>
+    </AuthLayout>
   );
 };
 

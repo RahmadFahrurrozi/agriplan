@@ -11,17 +11,17 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import SocialButton from "../../Login/components/social-button";
 import AuthImage from "../../components/auth-image";
-import SocialButton from "./social-button";
-import useLoginFrom from "../hooks/useLoginForm";
 import DATA_IMAGE from "@/constants/DATA_IMAGE";
+import useRegisterForm from "../hooks/useRegisterForm";
 import { Loader2 } from "lucide-react";
 
-const LoginForm = ({ className, ...props }: React.ComponentProps<"div">) => {
-  const { loginForm, handleSubmit, isLoading } = useLoginFrom();
+const RegisterForm = ({ className, ...props }: React.ComponentProps<"div">) => {
+  const { registerForm, handleSubmitRegister, isLoading } = useRegisterForm();
 
   return (
-    <Form {...loginForm}>
+    <Form {...registerForm}>
       <div
         className={cn(
           "flex flex-col gap-6 max-w-2xl w-full mx-4 md:mx-0",
@@ -32,20 +32,20 @@ const LoginForm = ({ className, ...props }: React.ComponentProps<"div">) => {
         <Card className="overflow-hidden p-0">
           <CardContent className="grid p-0 md:grid-cols-2">
             <form
-              onSubmit={loginForm.handleSubmit(handleSubmit)}
+              onSubmit={registerForm.handleSubmit(handleSubmitRegister)}
               className="p-4 md:p-6 w-full"
             >
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-3">
                 <div className="flex flex-col items-center text-center">
-                  <h1 className="text-2xl font-bold">Welcome back</h1>
+                  <h1 className="text-2xl font-bold">Hey, Welcome!</h1>
                   <p className="text-muted-foreground text-balance">
-                    Login to your Acme Inc account
+                    Create a new account
                   </p>
                 </div>
 
                 {/* Email Field */}
                 <FormField
-                  control={loginForm.control}
+                  control={registerForm.control}
                   name="email"
                   render={({ field }) => (
                     <FormItem>
@@ -64,9 +64,54 @@ const LoginForm = ({ className, ...props }: React.ComponentProps<"div">) => {
                   )}
                 />
 
+                <div className="flex flex-col gap-3 sm:flex-row sm:gap-2">
+                  {/* Name Field */}
+                  <FormField
+                    control={registerForm.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel htmlFor="name">Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            id="name"
+                            type="text"
+                            placeholder="John Doe"
+                            required
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* Age Field */}
+                  <FormField
+                    control={registerForm.control}
+                    name="age"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel htmlFor="age">Age</FormLabel>
+                        <FormControl>
+                          <Input
+                            // value={age}
+                            id="age"
+                            type="number"
+                            placeholder="Enter your age"
+                            required
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
                 {/* Password Field */}
                 <FormField
-                  control={loginForm.control}
+                  control={registerForm.control}
                   name="password"
                   render={({ field }) => (
                     <FormItem>
@@ -85,15 +130,28 @@ const LoginForm = ({ className, ...props }: React.ComponentProps<"div">) => {
                   )}
                 />
 
-                {/* Forgot Password Link */}
-                <div className="flex justify-start">
-                  <Link
-                    to="/forgot-password"
-                    className="text-sm underline-offset-2 hover:underline"
-                  >
-                    Forgot your password?
-                  </Link>
-                </div>
+                {/* Confirm Password Field */}
+                <FormField
+                  control={registerForm.control}
+                  name="confirmPassword"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel htmlFor="confirmPassword">
+                        Confirm Password
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          id="confirmPassword"
+                          type="password"
+                          placeholder="Confirm Password"
+                          required
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
                 {/* Submit Button */}
                 <Button
@@ -106,14 +164,14 @@ const LoginForm = ({ className, ...props }: React.ComponentProps<"div">) => {
                       <span className="text-sm">Loading...</span>
                     </div>
                   ) : (
-                    "Login"
+                    "Register"
                   )}
                 </Button>
 
                 {/* Other methods */}
                 <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
                   <span className="bg-card text-muted-foreground relative z-10 px-2">
-                    Or continue with
+                    Or register with
                   </span>
                 </div>
                 {/* social button component */}
@@ -121,9 +179,9 @@ const LoginForm = ({ className, ...props }: React.ComponentProps<"div">) => {
 
                 {/* Sign up link */}
                 <div className="text-center text-sm">
-                  Don&apos;t have an account?{" "}
-                  <Link to="/register" className="underline underline-offset-4">
-                    Register
+                  Already have an account?{" "}
+                  <Link to="/login" className="underline underline-offset-4">
+                    Login
                   </Link>
                 </div>
               </div>
@@ -131,8 +189,8 @@ const LoginForm = ({ className, ...props }: React.ComponentProps<"div">) => {
 
             {/* login image components */}
             <AuthImage
-              src={DATA_IMAGE.loginIlustration}
-              alt="login-image-ilustration"
+              src={DATA_IMAGE.registerIlustration}
+              alt="register-image-ilustration"
             />
           </CardContent>
         </Card>
@@ -147,4 +205,4 @@ const LoginForm = ({ className, ...props }: React.ComponentProps<"div">) => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
