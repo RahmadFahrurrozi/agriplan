@@ -11,12 +11,14 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import LoginImage from "./login-image";
+import AuthImage from "../../components/auth-image";
 import SocialButton from "./social-button";
 import useLoginFrom from "../hooks/useLoginForm";
+import DATA_IMAGE from "@/constants/DATA_IMAGE";
+import { Loader2 } from "lucide-react";
 
 const LoginForm = ({ className, ...props }: React.ComponentProps<"div">) => {
-  const { loginForm, handleSubmit } = useLoginFrom();
+  const { loginForm, handleSubmit, isLoading } = useLoginFrom();
 
   return (
     <Form {...loginForm}>
@@ -96,9 +98,16 @@ const LoginForm = ({ className, ...props }: React.ComponentProps<"div">) => {
                 {/* Submit Button */}
                 <Button
                   type="submit"
-                  className="w-full bg-green-600 cursor-pointer"
+                  className="w-full bg-green-600 hover:bg-green-700 transition-colors cursor-pointer"
                 >
-                  Login
+                  {isLoading ? (
+                    <div className="flex items-center gap-2">
+                      <Loader2 className="size-4 animate-spin" />
+                      <span className="text-sm">Loading...</span>
+                    </div>
+                  ) : (
+                    "Login"
+                  )}
                 </Button>
 
                 {/* Other methods */}
@@ -114,14 +123,17 @@ const LoginForm = ({ className, ...props }: React.ComponentProps<"div">) => {
                 <div className="text-center text-sm">
                   Don&apos;t have an account?{" "}
                   <Link to="/register" className="underline underline-offset-4">
-                    Sign up
+                    Register
                   </Link>
                 </div>
               </div>
             </form>
 
             {/* login image components */}
-            <LoginImage />
+            <AuthImage
+              src={DATA_IMAGE.loginIlustration}
+              alt="login-image-ilustration"
+            />
           </CardContent>
         </Card>
 
